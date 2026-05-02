@@ -506,6 +506,14 @@
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-' + screen).classList.add('active');
     }
+
+    // Si venimos de una app, mostrar la sección correcta directamente
+    (function() {
+        const hash = location.hash.replace('#', '');
+        if (hash === 'hospital' || hash === 'prehospitalaria') {
+            goTo(hash);
+        }
+    })();
 </script>
 
 </body>
