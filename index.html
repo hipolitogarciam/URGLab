@@ -23,7 +23,7 @@
         document.head.appendChild(l);
         var m = document.createElement('link');
         m.rel = 'manifest';
-        var mdata = JSON.stringify({name:'URGlab',short_name:'URGlab',start_url:'./index.html',display:'standalone',background_color:'#0e1a27',theme_color:'#1a6fad',icons:[{src:png,sizes:'512x512',type:'image/png',purpose:'any maskable'}]});
+        var mdata = JSON.stringify({name:'URGlab',short_name:'URGlab',start_url: window.location.pathname,display:'standalone',background_color:'#0e1a27',theme_color:'#1a6fad',icons:[{src:png,sizes:'512x512',type:'image/png',purpose:'any maskable'}]});
         m.href = URL.createObjectURL(new Blob([mdata],{type:'application/manifest+json'}));
         document.head.appendChild(m);
       };
