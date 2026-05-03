@@ -534,11 +534,16 @@
         document.getElementById('screen-' + screen).classList.add('active');
     }
 
-    // Si venimos de una app, mostrar la sección correcta directamente
+    // Lógica de entrada limpia y universal (iOS/Android/PC)
     (function() {
-        const hash = location.hash.replace('#', '');
+        const hash = window.location.hash.replace('#', '');
         if (hash === 'hospital' || hash === 'prehospitalaria') {
             goTo(hash);
+            // Limpia el rastro de la URL inmediatamente para evitar bloqueos en el próximo inicio
+            history.replaceState(null, null, window.location.pathname);
+        } else {
+            // Asegura que siempre inicie en el HUB si no hay instrucción específica
+            goTo('home');
         }
     })();
 </script>
