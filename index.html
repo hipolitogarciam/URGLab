@@ -534,13 +534,16 @@
         document.getElementById('screen-' + screen).classList.add('active');
     }
 
-    // 1. Forzamos siempre el inicio en la pantalla principal (ignorando la memoria del iPhone)
-    goTo('home');
-    
-    // 2. Si el iPhone insiste en poner un "#" en la dirección, lo borramos silenciosamente
-    if (window.location.hash) {
-        history.replaceState(null, null, window.location.pathname);
-    }
+    // Leemos si el botón de "Atrás" nos está mandando a una sección específica
+    (function() {
+        const hash = window.location.hash.replace('#', '');
+        
+        if (hash === 'hospital' || hash === 'prehospitalaria') {
+            goTo(hash); // Abre la sección correspondiente
+        } else {
+            goTo('home'); // Si no hay orden (arranque desde cero), va a la portada
+        }
+    })();
 </script>
 
 </body>
