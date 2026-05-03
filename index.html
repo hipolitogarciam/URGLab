@@ -534,18 +534,13 @@
         document.getElementById('screen-' + screen).classList.add('active');
     }
 
-    // Lógica de entrada limpia y universal (iOS/Android/PC)
-    (function() {
-        const hash = window.location.hash.replace('#', '');
-        if (hash === 'hospital' || hash === 'prehospitalaria') {
-            goTo(hash);
-            // Limpia el rastro de la URL inmediatamente para evitar bloqueos en el próximo inicio
-            history.replaceState(null, null, window.location.pathname);
-        } else {
-            // Asegura que siempre inicie en el HUB si no hay instrucción específica
-            goTo('home');
-        }
-    })();
+    // 1. Forzamos siempre el inicio en la pantalla principal (ignorando la memoria del iPhone)
+    goTo('home');
+    
+    // 2. Si el iPhone insiste en poner un "#" en la dirección, lo borramos silenciosamente
+    if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname);
+    }
 </script>
 
 </body>
